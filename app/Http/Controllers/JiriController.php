@@ -45,10 +45,8 @@ class JiriController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Jiri $jiri)
     {
-        $jiri = Jiri::findOrFail($id);
-
         return view('jiris.show', compact('jiri'));
     }
 

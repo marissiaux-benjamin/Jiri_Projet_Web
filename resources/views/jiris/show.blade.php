@@ -4,7 +4,7 @@
     <dl class="flex gap-20 justify-center bg-sky-800 p-4 rounded w-fit ml-auto mr-auto">
         <div>
             <dt class="font-bold text-white">Name of the jiri</dt>
-            <dd class="text-white">{{  $jiri->name }}</dd>
+            <dd class="text-white">{{ $jiri->name }}</dd>
         </div>
         <div>
             <dt class="font-bold text-white">Date and Time of the jiri</dt>
