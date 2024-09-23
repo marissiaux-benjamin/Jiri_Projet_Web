@@ -37,9 +37,15 @@ class JiriController extends Controller
      */
     public function store(Request $request)
     {
-        $jiri = Jiri::create($request->all());
 
-        return redirect()->route('jiris.show', $jiri->id);
+        $validated = $request->validate([
+            'name' => 'required|string|between:3,255',
+            'starting_at' => 'required|date_format:Y-m-d H:i',
+        ]);
+
+        $jiri = Jiri::create($validated);
+
+        return to_route('jiri.show', $jiri);
     }
 
     /**
