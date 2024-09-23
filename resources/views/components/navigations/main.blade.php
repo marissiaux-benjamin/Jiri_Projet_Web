@@ -6,7 +6,7 @@
         @foreach($links as $link)
             <li class="underline text-sky-900 uppercase tracking-wider">
                 <a href="{{ $link['url'] }}">
-                    {{ $link['name'] }}
+                    {{ __($link['name']) }}
                 </a>
             </li>
         @endforeach

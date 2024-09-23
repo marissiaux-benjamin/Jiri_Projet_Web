@@ -6,7 +6,7 @@
 
         <div class="flex flex-col gap-2 text-white">
             <label for="name" class="rounded text-3xl">
-                Name of the project
+                {{  __('Name of the jiri') }}
                 @error('name')
                 <span class=" block text-lg text-red-500">{{ $message }}</span>
                 @enderror
@@ -22,7 +22,7 @@
 
         <div class="flex flex-col gap-2 text-white">
             <label for="starting" class="rounded text-3xl">
-                Beginning of the project
+                {{  __('Beginning of the project') }}
                 @error('starting_at')
                 <span class=" block text-lg text-red-500">{{ $message }}</span>
                 @enderror
@@ -37,9 +37,9 @@
         </div>
 
         <div class="ml-auto mr-auto">
-            <input type="submit"
-                   value="Create"
-                   class="bg-lime-400 font-bold text-sky-900 rounded p-2 px-4 uppercase hover:scale-105 transition-all duration-200">
+            <button type="submit" class="bg-lime-400 font-bold text-sky-900 rounded p-2 px-4 uppercase hover:scale-105 transition-all duration-200">
+                {{ __('create this jiri') }}
+            </button>
         </div>
 
     </form>

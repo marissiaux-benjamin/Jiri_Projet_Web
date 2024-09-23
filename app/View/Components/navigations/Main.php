@@ -22,7 +22,7 @@ class Main extends Component
         $this->title = "Main navigation";
         $this->links = [
             ['name' => 'Jiri', 'url' => '/'],
-            ['name' => 'Porjects', 'url' => '/projects'],
+            ['name' => 'Projects', 'url' => '/projects'],
             ['name' => 'Contacts', 'url' => '/contacts'],
         ];
     }
