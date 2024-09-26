@@ -25,5 +25,10 @@
     "Add this contact": "Ajouter ce contact",
     "Contact's name": "Nom du contact",
     "Contact's surname": "Nom de famille du contact",
-    "Contact's email": "Email du contact"
+    "Contact's email": "Email du contact",
+    "Modify this contact": "Modifier ce contact",
+    "Delete this contact": "Supprimer ce contact",
+    "Modify this project": "Modifier ce projet",
+    "Delete this project": "Supprimer ce projet",
+    "URL of the project": "URL du projet"
 }

@@ -12,4 +12,22 @@
             {{ $project->url }}
         </p>
     </div>
+
+    <div class="flex gap-5 justify-between ml-auto mr-auto">
+        <a href="/projects/{{ $project->id }}/edit"
+           class="bg-lime-400 font-bold text-sky-950 rounded p-2 px-4 uppercase w-fit hover:scale-105 transition-all duration-200">
+            {{  __('Modify this project') }}</a>
+
+        <form method="POST" action="{{ route('project.destroy', $project) }}">
+
+            @csrf
+            @method('DELETE')
+
+            <button type="submit"
+                    class="bg-red-600 font-bold text-white rounded p-2 px-4 uppercase hover:scale-105 transition-all duration-200">
+                {{ __('Delete this project') }}
+            </button>
+        </form>
+    </div>
+
 </x-layouts.main>

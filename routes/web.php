@@ -14,11 +14,17 @@ Route::post('/jiris', [App\Http\Controllers\JiriController::class, 'store'])->na
 
 Route::get('/contacts', [App\Http\Controllers\ContactController::class, 'index'])->name('contacts.index');
 Route::get('/contact/create', [App\Http\Controllers\ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
 Route::get('/contacts/{contact}', [App\Http\Controllers\ContactController::class, 'show'])->name('contact.show');
+Route::get('/contacts/{contact}/edit', [App\Http\Controllers\ContactController::class, 'edit'])->name('contact.edit');
+Route::patch('/contacts/{contact}', [App\Http\Controllers\ContactController::class, 'update'])->name('contact.update');
+Route::delete('/contacts/{contact}', [App\Http\Controllers\ContactController::class, 'destroy'])->name('contact.destroy');
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/create', [App\Http\Controllers\ProjectController::class, 'create'])->name('project.create');
-Route::post('/project', [App\Http\Controllers\ProjectController::class, 'store'])->name('project.store');
 Route::get('/projects/{project}', [App\Http\Controllers\ProjectController::class, 'show'])->name('project.show');
+Route::get('/projects/{project}/edit', [App\Http\Controllers\ProjectController::class, 'edit'])->name('project.edit');
+Route::patch('/projects/{project}', [App\Http\Controllers\ProjectController::class, 'update'])->name('project.update');
+Route::delete('/projects/{project}', [App\Http\Controllers\ProjectController::class, 'destroy'])->name('project.destroy');
+Route::post('/project', [App\Http\Controllers\ProjectController::class, 'store'])->name('project.store');
 
