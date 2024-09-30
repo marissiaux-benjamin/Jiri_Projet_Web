@@ -39,10 +39,7 @@
         </div>
 
         <div class="ml-auto mr-auto">
-            <button type="submit"
-                    class="bg-lime-400 font-bold text-sky-900 rounded p-2 px-4 uppercase hover:scale-105 transition-all duration-200">
-                {{ __('Modify this contact') }}
-            </button>
+            <x-form.control.button color="lime" :text="__('Modify this contact')" text_color="text-sky-900"/>
         </div>
 
 

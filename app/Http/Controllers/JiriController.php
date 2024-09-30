@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\JiriStoreRequest;
 use App\Http\Requests\JiriUpdateRequest;
 use App\Models\Jiri;
+use App\Models\User;
+use Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Gate;
 
 class JiriController extends Controller
 {
@@ -16,12 +19,10 @@ class JiriController extends Controller
      */
     public function index()
     {
-        $upcomingJiris = Jiri::where('starting_at', '>', now())
-            ->orderBy('starting_at')
+        $pastJiris = Auth::user()?->pastJiris()
             ->get();
 
-        $pastJiris = Jiri::where('starting_at', '<=', now())
-            ->orderBy('starting_at', 'desc')
+        $upcomingJiris = Auth::user()?->upcomingJiris()
             ->get();
 
 
@@ -51,6 +52,7 @@ class JiriController extends Controller
      */
     public function show(Jiri $jiri)
     {
+        //Gate::allowIf(fn (User $user) => $user->id === $jiri['user_id']);
         return view('jiris.show', compact('jiri'));
     }
 

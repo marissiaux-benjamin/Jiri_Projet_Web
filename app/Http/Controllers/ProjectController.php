@@ -15,7 +15,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = \Auth::user()
+            ->projects()
+            ->get();
         return view('projects.index', compact('projects'));
     }
 
@@ -30,7 +32,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProjectStoreRequest $request):RedirectResponse
+    public function store(ProjectStoreRequest $request): RedirectResponse
     {
         $project = Project::create($request->validated());
 

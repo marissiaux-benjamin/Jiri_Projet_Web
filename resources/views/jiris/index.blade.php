@@ -13,9 +13,7 @@
         </section>
     </div>
 
-    <a href="/jiris/create"
-       class="bg-lime-400 ml-auto mr-auto font-bold text-sky-950 rounded p-2 px-4 uppercase w-fit hover:scale-105 transition-all duration-200">
-        {{  __('Create a new Jiri') }}</a>
+    <x-form.controls.links color="bg-lime-400" text_color="text-sky-900" url_route="jiris/create" :text="__('Create a new Jiri')"/>
 
 </x-layouts.main>
 

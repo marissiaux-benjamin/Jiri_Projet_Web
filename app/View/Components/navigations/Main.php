@@ -21,7 +21,7 @@ class Main extends Component
     {
         $this->title = "Main navigation";
         $this->links = [
-            ['name' => 'Jiri', 'url' => '/'],
+            ['name' => 'Jiri', 'url' => '/jiris'],
             ['name' => 'Projects', 'url' => '/projects'],
             ['name' => 'Contacts', 'url' => '/contacts'],
         ];
