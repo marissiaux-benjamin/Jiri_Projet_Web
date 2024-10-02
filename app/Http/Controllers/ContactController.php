@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
 use App\Models\Contact;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ContactController extends Controller
 {
@@ -42,9 +44,9 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
+        Gate::allowIf(fn (User $user) => $user->id === $contact['user_id']);
         return view('contacts.show', compact('contact'));
     }
 
@@ -53,6 +55,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
+        Gate::allowIf(fn (User $user) => $user->id === $contact['user_id']);
         return view('contacts.edit', compact('contact'));
     }
 

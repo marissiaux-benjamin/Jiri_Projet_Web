@@ -52,7 +52,7 @@ class JiriController extends Controller
      */
     public function show(Jiri $jiri)
     {
-        //Gate::allowIf(fn (User $user) => $user->id === $jiri['user_id']);
+        Gate::allowIf(fn (User $user) => $user->id === $jiri['user_id']);
         return view('jiris.show', compact('jiri'));
     }
 
@@ -61,6 +61,7 @@ class JiriController extends Controller
      */
     public function edit(Jiri $jiri)
     {
+        Gate::allowIf(fn (User $user) => $user->id === $jiri['user_id']);
         return view('jiris.edit', compact('jiri'));
     }
 

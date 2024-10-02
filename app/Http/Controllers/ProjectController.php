@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProjectStoreRequest;
 use App\Http\Requests\ProjectUpdateRequest;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProjectController extends Controller
 {
@@ -42,9 +44,9 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        $project = Project::findOrFail($id);
+        Gate::allowIf(fn (User $user) => $user->id === $project['user_id']);
         return view('projects.show', compact('project'));
     }
 
@@ -53,6 +55,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        Gate::allowIf(fn (User $user) => $user->id === $project['user_id']);
         return view('projects.edit', compact('project'));
     }
 
