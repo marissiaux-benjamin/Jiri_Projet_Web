@@ -46,7 +46,6 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        Gate::allowIf(fn (User $user) => $user->id === $contact['user_id']);
         return view('contacts.show', compact('contact'));
     }
 
@@ -55,7 +54,6 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        Gate::allowIf(fn (User $user) => $user->id === $contact['user_id']);
         return view('contacts.edit', compact('contact'));
     }
 

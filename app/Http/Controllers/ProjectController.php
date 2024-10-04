@@ -46,7 +46,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        Gate::allowIf(fn (User $user) => $user->id === $project['user_id']);
         return view('projects.show', compact('project'));
     }
 
@@ -55,7 +54,6 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        Gate::allowIf(fn (User $user) => $user->id === $project['user_id']);
         return view('projects.edit', compact('project'));
     }
 

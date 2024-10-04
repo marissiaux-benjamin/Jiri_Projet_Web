@@ -2,16 +2,16 @@
 
 use App\Models\User;
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
+use function Pest\Laravel\patch;
 
 beforeEach(function () {
     $this->user1 = User::factory()
         ->hasJiris(1)
-        ->hasProject(1)
         ->create();
     $this->user2 = User::factory()
         ->hasJiris(1)
-        ->hasProject(1)
         ->create();
 });
 
@@ -31,31 +31,28 @@ test('a user can only see his Jiri on the index page', function () {
 
 test('a user can\'t see another user\'s Jiri from a Jiri he owns', function () {
     actingAs($this->user1);
-    $jiri1 = $this->user2->jiris->first();
+    $jiri1 = $this->user1->jiris->first();
+    $jiri2 = $this->user2->jiris->first();
 
-    $response = get(route('jiri.show'), $jiri1);
+    $response = get(route('jiri.show'), $jiri2);
 
     $response->assertStatus(403);
 });
 
 test('a user can\'t modify another user\'s jiri', function () {
     actingAs($this->user2);
-    $jiri2 = $this->user1->jiris->first();
+    $jiri1 = $this->user1->jiris->first();
 
-    $response = get(route('jiri.edit'), $jiri2);
+    $response = patch(route('jiri.update'), $jiri1);
     $response->assertStatus(403);
 });
 
-
-//test pour les projets.
-test('a user can modify another user\'s project from a projects he owns', function () {
+test('a user cannot delete another user\'s jiri', function () {
     actingAs($this->user1);
-    $project1 = $this->user2->projects->first();
-    $project2 = $this->user2->project->first();
 
-    $response = get(route('projects.index'), $project1);
+    $other_jiri = $this->user2->jiris()->first();
 
-    $response->assertStatus(200);
-    $response->assertSee($project1->name);
-    $response->assertDontSee($project2->name);
+    $response = delete(route('jiri.destroy'), $other_jiri);
+
+    $response->assertStatus(403);
 });

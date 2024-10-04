@@ -40,5 +40,9 @@ return new class extends Migration {
             $table->dropForeign('user_id');
         });
 
+        Schema::table('attendances',function(Blueprint $table) {
+            $table->dropforeign('user_id');
+        });
+
     }
 };
