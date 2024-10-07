@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\ContactRole;
+use App\Enums\ContactRoles;
 use App\Models\Jiri;
 use App\Models\User;
 
@@ -15,8 +15,8 @@ test('jiri has many students', function () {
         ->contacts()
         ->create(['name' => 'Stacy', 'email' => 'stacy@test.com', 'user_id' => $user->id]);
 
-    $jiri->students()->attach($contact->id, ['role' => ContactRole::Student->value]);
-    $jiri->evaluators()->attach($contact->id, ['role' => ContactRole::Evaluator->value]);
+    $jiri->students()->attach($contact->id, ['role' => ContactRoles::Student->value]);
+    $jiri->evaluators()->attach($contact->id, ['role' => ContactRoles::Evaluator->value]);
 
     expect($jiri->students)->toHaveCount(1)
         ->and($jiri->contacts)->toHaveCount(2);

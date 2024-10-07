@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use App\Enums\ContactRole;
+use App\Enums\ContactRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Jiri extends Model
 {
@@ -36,14 +37,35 @@ class Jiri extends Model
 
     public function students(): BelongsToMany
     {
-        return $this->contacts()
-            ->wherePivot('role', ContactRole::Student->value);
+        return $this
+            ->contacts()
+            ->withPivot('id')
+            ->withPivotValue('role', ContactRoles::Student->value)
+            ->withTimestamps();
     }
 
     public function evaluators(): BelongsToMany
     {
-        return $this->contacts()
-            ->wherePivot('role', ContactRole::Evaluator->value);
+        return $this
+            ->contacts()
+            ->withPivot('id')
+            ->withPivotValue('role', ContactRoles::Evaluator->value)
+            ->withTimestamps();
+    }
+
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Contact::class,Attendance::class);
+    }
+
+    public function addStudent(Contact $contact)
+    {
+        $this->contacts()->attach($contact, ['role' => 'student']);
+    }
+
+    public function addEvaluator(Contact $contact)
+    {
+        $this->contacts()->attach($contact, ['role' => 'evaluator']);
     }
 
 }

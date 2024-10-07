@@ -32,5 +32,7 @@
     "Modify this project": "Modifier ce projet",
     "Delete this project": "Supprimer ce projet",
     "URL of the project": "URL du projet",
-    "logout": "Déconnecter"
+    "logout": "Déconnecter",
+    "Change to student": "Changer en étudiant",
+    "Change to evaluator": "Changer en évaluateur"
 }

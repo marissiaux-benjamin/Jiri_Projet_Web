@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -49,9 +50,13 @@ class AttendanceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Attendance $attendance)
     {
-        //
+        $attendance->role = $request->role;
+
+        $attendance->save();
+
+        return redirect()->route('jiri.show', $attendance->jiri_id);
     }
 
     /**

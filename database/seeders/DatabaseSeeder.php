@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\ContactRole;
+use App\Enums\ContactRoles;
 use App\Models\Contact;
 use App\Models\Jiri;
 use App\Models\Project;
@@ -29,13 +29,13 @@ class DatabaseSeeder extends Seeder
                         ->contacts->random(10),
                         [
                             'role' => random_int(0, 1) ?
-                                ContactRole::Evaluator->value :
-                                ContactRole::Student->value
+                                ContactRoles::Evaluator->value :
+                                ContactRoles::Student->value
                         ]);
                 });
             });
 
-        User::factory()
+       $ben = User::factory()
             ->has(Jiri::factory()->count(5), 'jiris')
             ->has(Contact::factory()->count(10), 'contacts')
             ->has(Project::factory()->count(5), 'projects')
@@ -43,14 +43,11 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Ben',
                 'email' => 'ben.marissiaux@gmail.com',
                 'password' => 'AZERTY1234'
-            ])
-            ->each(function ($user) {
-                $user->jiris->each(function ($jiri) use ($user) {
-                    $jiri->evaluators()->attach($user->contacts->random(10), [
-                        'role' => random_int(0, 1) ?
-                            ContactRole::Evaluator->value :
-                            ContactRole::Student->value
-                    ]);
+            ]);
+
+            $ben->jiris->each(function ($jiri) use ($ben) {
+                $ben->contacts->random(5)->each(function ($contact) use ($jiri) {
+                    $jiri->contacts()->attach($contact,['role' => random_int(0, 1) ?ContactRoles::Evaluator->value:ContactRoles::Student->value]);
                 });
             });
 

@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('jiri_id');
             $table->unsignedBigInteger('contact_id');
             $table->enum('role', [
-                \App\Enums\ContactRole::Student->value,
-                \App\Enums\ContactRole::Evaluator->value]);
+                \App\Enums\ContactRoles::Student->value,
+                \App\Enums\ContactRoles::Evaluator->value]);
             $table->timestamps();
         });
     }

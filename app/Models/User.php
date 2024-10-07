@@ -78,4 +78,8 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
+    public function attendances(){
+        return $this->hasMany(Attendance::class, 'contact_id');
+    }
+
 }

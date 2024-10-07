@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum ContactRole:string
+enum ContactRoles:string
 {
     case Student = 'student';
     case Evaluator = 'evaluator';
