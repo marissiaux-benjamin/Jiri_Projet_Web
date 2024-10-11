@@ -63,7 +63,8 @@
                 @foreach($jiri->evaluators as $evaluator)
                     <li class="flex justify-between text-white mb-7">
                         {{ $evaluator->name }}
-                        <form action="{{ route('attendance.update',$evaluator->pivot->id) }}" class="ml-4" method="post">
+                        <form action="{{ route('attendance.update',$evaluator->pivot->id) }}" class="ml-4"
+                              method="post">
                             @csrf
                             @method('PATCH')
                             <input type="hidden" name="role" value="{{ \App\Enums\ContactRoles::Student->value }}">
@@ -77,5 +78,18 @@
             </ul>
         </section>
     </div>
+    <section class="flex-1 mt-3 mr-auto ml-auto">
+        <h1 class="text-white font-bold text-3xl mb-6">
+            {{ __('Associated projects') }}&nbsp;:
+        </h1>
+        <ul>
+            @foreach($jiri->projects as $project)
+                <li class="mb-6 text-white">
+                    <a class="underline" href="{{ route('project.show', $project) }}">{{ $project->name }}</a>
+                    <x-form.controls.button color="bg-red-600" text_color="text-white" :text="__('Remove')" ml="ml-5"/>
+                </li>
+            @endforeach
+        </ul>
+    </section>
 
 </x-layouts.main>

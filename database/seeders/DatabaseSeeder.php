@@ -27,15 +27,11 @@ class DatabaseSeeder extends Seeder
                 $user->jiris->each(function ($jiri) use ($user) {
                     $jiri->contacts()->attach($user
                         ->contacts->random(10),
-                        [
-                            'role' => random_int(0, 1) ?
-                                ContactRoles::Evaluator->value :
-                                ContactRoles::Student->value
-                        ]);
+                        ['role' => random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value]);
                 });
             });
 
-       $ben = User::factory()
+        $ben = User::factory()
             ->has(Jiri::factory()->count(5), 'jiris')
             ->has(Contact::factory()->count(10), 'contacts')
             ->has(Project::factory()->count(5), 'projects')
@@ -45,11 +41,16 @@ class DatabaseSeeder extends Seeder
                 'password' => 'AZERTY1234'
             ]);
 
-            $ben->jiris->each(function ($jiri) use ($ben) {
-                $ben->contacts->random(5)->each(function ($contact) use ($jiri) {
-                    $jiri->contacts()->attach($contact,['role' => random_int(0, 1) ?ContactRoles::Evaluator->value:ContactRoles::Student->value]);
-                });
+        $ben->jiris->each(function ($jiri) use ($ben) {
+            $ben->contacts->random(5)->each(function ($contact) use ($jiri) {
+                $jiri->contacts()->attach($contact, ['role' => random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value]);
             });
+
+            $ben->projects->random(5)->each(function ($project) use ($jiri) {
+                $jiri->projects()->attach($project);
+            });
+
+        });
 
         $this->call([
             //Jiri::factory(10)->create(),

@@ -34,5 +34,9 @@
     "URL of the project": "URL du projet",
     "logout": "Déconnecter",
     "Change to student": "Changer en étudiant",
-    "Change to evaluator": "Changer en évaluateur"
+    "Change to evaluator": "Changer en évaluateur",
+    "Student": "Etudiant",
+    "Evaluator": "Evaluateur",
+    "Associated projects": "Projets associés",
+    "Remove": "Supprimer"
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use Auth;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -28,8 +29,9 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//
     }
+
 
     /**
      * Display the specified resource.
