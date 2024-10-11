@@ -51,11 +51,5 @@ class DatabaseSeeder extends Seeder
             });
 
         });
-
-        $this->call([
-            //Jiri::factory(10)->create(),
-            //ContactSeeder::class,
-            // ProjectSeeder::class,
-        ]);
     }
 }

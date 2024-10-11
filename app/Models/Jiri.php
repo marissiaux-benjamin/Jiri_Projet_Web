@@ -34,9 +34,12 @@ class Jiri extends Model
     {
         return $this->belongsToMany(Contact::class, Attendance::class);
     }
+
     public function projects(): BelongsToMany
     {
-        return $this->belongsToMany(Project::class, Assignment::class);
+        return $this
+            ->belongsToMany(Project::class, Assignment::class)
+            ->withPivot('id');
     }
 
     public function students(): BelongsToMany
@@ -59,7 +62,7 @@ class Jiri extends Model
 
     public function attendances(): HasMany
     {
-        return $this->hasMany(Contact::class,Attendance::class);
+        return $this->hasMany(Contact::class, Attendance::class);
     }
 
     public function addStudent(Contact $contact)

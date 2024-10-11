@@ -86,7 +86,12 @@
             @foreach($jiri->projects as $project)
                 <li class="mb-6 text-white flex justify-between">
                     <a class="underline mr-3" href="{{ route('project.show', $project) }}">{{ $project->name }}</a>
-                    <x-form.controls.button color="bg-red-600" text_color="text-white" :text="__('Remove')" ml="ml-10"/>
+                    <form method="post" action="{{ route('assignment.destroy', $project->pivot->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden">
+                        <x-form.controls.button color="bg-red-600" text_color="text-white" :text="__('Remove')" ml="ml-10"/>
+                    </form>
                 </li>
             @endforeach
         </ul>

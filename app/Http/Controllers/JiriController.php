@@ -35,9 +35,10 @@ class JiriController extends Controller
      */
     public function create()
     {
+        $projects = Auth::user()?->projects()->get();
         $contacts = Auth::user()->contacts()->get();
 
-        return view('jiris.create', compact('contacts'));
+        return view('jiris.create', compact('contacts', 'projects'));
     }
 
     /**
@@ -53,6 +54,11 @@ class JiriController extends Controller
                 $jiri->contacts()->attach($contact_id, ['role' => $role]);
             }
         }
+
+        foreach ($request->input('projects') as $project_id) {
+            $jiri->projects()->attach($project_id);
+        }
+
         return to_route('jiri.show', $jiri);
     }
 
@@ -89,6 +95,7 @@ class JiriController extends Controller
      */
     public function destroy(Jiri $jiri)
     {
+
         $jiri->delete();
 
         return to_route('jiris.index');
