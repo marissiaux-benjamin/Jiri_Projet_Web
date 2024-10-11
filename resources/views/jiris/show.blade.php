@@ -84,9 +84,9 @@
         </h1>
         <ul>
             @foreach($jiri->projects as $project)
-                <li class="mb-6 text-white">
-                    <a class="underline" href="{{ route('project.show', $project) }}">{{ $project->name }}</a>
-                    <x-form.controls.button color="bg-red-600" text_color="text-white" :text="__('Remove')" ml="ml-5"/>
+                <li class="mb-6 text-white flex justify-between">
+                    <a class="underline mr-3" href="{{ route('project.show', $project) }}">{{ $project->name }}</a>
+                    <x-form.controls.button color="bg-red-600" text_color="text-white" :text="__('Remove')" ml="ml-10"/>
                 </li>
             @endforeach
         </ul>
