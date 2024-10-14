@@ -9,6 +9,7 @@ use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ContactController extends Controller
 {
@@ -36,14 +37,20 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request)
     {
+
         $validated = $request->validated();
 
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('photos', 'public');
+            $validated['photo'] = $request->file('photo')->store('contacts/' . Auth::user()->id . '/original');
         }
-            dd($validated);
 
-        $contact = Contact::create($validated);
+        $img = Image::read($request->file('photo'));
+
+        $img->resize(320, 240);
+
+        $img->save('public/bar.jpg');
+
+        $contact = Auth::user()->contacts()->create($validated);
 
         return to_route('contact.show', $contact);
     }

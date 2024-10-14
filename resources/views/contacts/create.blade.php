@@ -1,6 +1,7 @@
 <x-layouts.main>
 
-    <form action="/contact" method="POST" class="flex flex-col gap-12 bg-sky-800 p-4 rounded w-2/5 ml-auto mr-auto">
+    <form action="/contact" enctype="multipart/form-data" method="POST"
+          class="flex flex-col gap-12 bg-sky-800 p-4 rounded w-2/5 ml-auto mr-auto">
 
         @CSRF
 
@@ -53,10 +54,13 @@
         </div>
 
         <div class="flex flex-col gap-2 text-white">
-            <label for="photo">
-                {{ __('User\'s profile picture') }}
-            </label>
-            <input type="file" formenctype="multipart/form-data" id="photo" class="border-gray-500 border-2 rounded text-lg" name="photo">
+                <label for="photo">
+                    {{ __('User\'s profile picture') }}
+                    @error('photo')
+                    <span class=" block text-lg text-red-500">{{ $message }}</span>
+                    @enderror
+                </label>
+                <input type="file" id="photo" class="border-gray-500 border-2 rounded text-lg pt-2 pb-2 pl-1 bg-sky-900" name="photo">
         </div>
 
         <div class="ml-auto mr-auto">
