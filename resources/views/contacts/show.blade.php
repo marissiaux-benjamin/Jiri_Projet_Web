@@ -1,4 +1,9 @@
 <x-layouts.main>
+
+    @if(Auth::user()->photo)
+        <img src="{{ asset('/storage/images').Auth::user()->photo }}" alt="profile picture" class="rounded">
+    @endif
+
     <h1 class="font-bold text-5xl text-white ml-auto mr-auto mt-40">{{ $contact->name }}</h1>
     <p class="text-white text-2xl ml-auto mr-auto">
         {{ $contact->email }}

@@ -52,6 +52,13 @@
                    class="pl-2 text-lg rounded outline-none text-white bg-sky-900 focus:border-2 focus:border-lime-400">
         </div>
 
+        <div class="flex flex-col gap-2 text-white">
+            <label for="photo">
+                {{ __('User\'s profile picture') }}
+            </label>
+            <input type="file" formenctype="multipart/form-data" id="photo" class="border-gray-500 border-2 rounded text-lg" name="photo">
+        </div>
+
         <div class="ml-auto mr-auto">
             <button type="submit"
                     class="bg-lime-400 font-bold text-sky-900 rounded p-2 px-4 uppercase hover:scale-105 transition-all duration-200">

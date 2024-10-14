@@ -36,7 +36,14 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request)
     {
-        $contact = Contact::create($request->validated());
+        $validated = $request->validated();
+
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos', 'public');
+        }
+            dd($validated);
+
+        $contact = Contact::create($validated);
 
         return to_route('contact.show', $contact);
     }
