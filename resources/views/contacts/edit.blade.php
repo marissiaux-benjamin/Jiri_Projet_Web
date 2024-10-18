@@ -40,15 +40,16 @@
         </div>
 
         <div class="flex flex-col gap-2 text-white">
-
             <label for="photo">
                 {{ __('User\'s profile picture') }}
                 @error('photo')
                 <span class=" block text-lg text-red-500">{{ $message }}</span>
                 @enderror
             </label>
+            <img src="{{ asset($contact->photo) }}" alt="profile picture" class="rounded">
+
             <input type="file" id="photo" class="border-gray-500 border-2 rounded text-lg pt-2 pb-2 pl-1 bg-sky-900"
-                   name="photo" value="{{ $contact->photo }}">
+                   name="photo">
         </div>
 
         <div class="ml-auto mr-auto">

@@ -25,9 +25,15 @@ class DatabaseSeeder extends Seeder
             ->create()
             ->each(function ($user) {
                 $user->jiris->each(function ($jiri) use ($user) {
+                    $roles = random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value;
                     $jiri->contacts()->attach($user
                         ->contacts->random(10),
-                        ['role' => random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value]);
+                        [
+                            'role' => random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value,
+                            'token' => $roles == ContactRoles::Evaluator->value ? bin2hex(random_bytes(32)) : null,
+                        ]
+
+                    );
                 });
             });
 
@@ -43,7 +49,11 @@ class DatabaseSeeder extends Seeder
 
         $ben->jiris->each(function ($jiri) use ($ben) {
             $ben->contacts->random(5)->each(function ($contact) use ($jiri) {
-                $jiri->contacts()->attach($contact, ['role' => random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value]);
+                $roles = random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value;
+                $jiri->contacts()->attach($contact, [
+                    'role' => $roles,
+                    'token' => $roles == ContactRoles::Evaluator->value ? bin2hex(random_bytes(32)) : null,
+                ]);
             });
 
             $ben->projects->random(5)->each(function ($project) use ($jiri) {

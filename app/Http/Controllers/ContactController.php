@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Concerns\HasImageVariants;
+use App\Events\ContactImageStored;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
 use App\Models\Contact;
 use App\Models\User;
 use Auth;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Laravel\Facades\Image;
+use Storage;
 
 class ContactController extends Controller
 {
+
+    use HasImageVariants;
     /**
      * Display a listing of the resource.
      */
@@ -37,18 +43,13 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request)
     {
-
         $validated = $request->validated();
 
         if ($request->hasFile('photo')) {
-            $validated['photo'] = $request->file('photo')->store('contacts/' . Auth::user()->id . '/original');
+            $validated['photo'] = Storage::putFile('contacts/'.Auth::id().'/original', $request->file('photo'));
+
+            ContactImageStored::dispatch($validated);
         }
-
-        $img = Image::read($request->file('photo'));
-
-        $img->resize(320, 240);
-
-        $img->save('public/bar.jpg');
 
         $contact = Auth::user()->contacts()->create($validated);
 

@@ -1,8 +1,10 @@
 <x-layouts.main>
+    <img class="ml-auto mr-auto"
+            srcset=" {{asset('contacts/'.Auth::id().'/large/'.basename($contact->photo))}} 720w,{{asset('contacts/'.Auth::id().'/medium/'.basename($contact->photo))}} 500w,{{asset('contacts/'.Auth::id().'/small/'.basename($contact->photo))}} 300w"
+            sizes="(max-width: 800px) 300px,(max-width: 1000px) 500px, 720px" src="{{asset($contact->photo)}}"
+            alt="Photo de profile">
 
-        <img src="{{ asset($contact->photo) }}" alt="profile picture" class="rounded">
-
-    <h1 class="font-bold text-5xl text-white ml-auto mr-auto mt-40">{{ $contact->name }}</h1>
+    <h1 class="font-bold text-5xl text-white ml-auto mr-auto mt-5">{{ $contact->name }}</h1>
     <p class="text-white text-2xl ml-auto mr-auto">
         {{ $contact->email }}
     </p>

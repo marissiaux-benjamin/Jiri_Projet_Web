@@ -18,6 +18,7 @@ class ContactFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'surname' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
         ];
     }

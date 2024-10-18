@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->enum('role', [
                 \App\Enums\ContactRoles::Student->value,
                 \App\Enums\ContactRoles::Evaluator->value]);
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }
