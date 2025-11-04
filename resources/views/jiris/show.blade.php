@@ -35,8 +35,8 @@
                     {{ __('Delete this jiri') }}
                 </button>
             </form>
-    </div>
     @endcan
+    </div>
     <div class="w-3/4 flex justify-between mt-10 ml-auto mr-auto">
         <section class="mb-32 mt-3 mr-auto ml-auto">
             <h1 class="text-white font-bold text-3xl mb-6">Students&nbsp;:</h1>

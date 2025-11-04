@@ -1,5 +1,5 @@
 <x-layouts.main>
-    <img class="ml-auto mr-auto"
+    <img class="ml-auto mr-auto rounded-2xl"
             srcset=" {{asset('contacts/'.Auth::id().'/large/'.basename($contact->photo))}} 720w,{{asset('contacts/'.Auth::id().'/medium/'.basename($contact->photo))}} 500w,{{asset('contacts/'.Auth::id().'/small/'.basename($contact->photo))}} 300w"
             sizes="(max-width: 800px) 300px,(max-width: 1000px) 500px, 720px" src="{{asset($contact->photo)}}"
             alt="Photo de profile">

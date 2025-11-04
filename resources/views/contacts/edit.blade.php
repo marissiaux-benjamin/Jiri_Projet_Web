@@ -19,7 +19,6 @@
                    placeholder="Charles"
                    name="name" value="{{ $contact->name }}"
                    autocapitalize="none"
-                   autocorrect="off"
                    class="pl-2 text-lg rounded outline-none text-white bg-sky-900 focus:border-2 focus:border-lime-400">
         </div>
 
